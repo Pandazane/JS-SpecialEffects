@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>焦点轮播图-js版</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css"></link>
+</head>
+<body>
+<div id="container">
+    <div id="list" style="left: -600px;">
+        <a href="#"><img src="images/5.jpg" alt=""></a>
+        <a href="#"><img src="images/1.jpg" alt=""></a>
+        <a href="#"><img src="images/2.jpg" alt=""></a>
+        <a href="#"><img src="images/3.jpg" alt=""></a>
+        <a href="#"><img src="images/4.jpg" alt=""></a>
+        <a href="#"><img src="images/5.jpg" alt=""></a>
+        <a href="#"><img src="images/1.jpg" alt=""></a>
+    </div>
+    <div id="buttons">
+        <span index="1" class="on"></span>
+        <span index="2"></span>
+        <span index="3"></span>
+        <span index="4"></span>
+        <span index="5"></span>
+    </div>
+    <a href="javascript:;" id="prev" class="arrow">&lt;</a>
+    <a href="javascript:;" id="next" class="arrow">&gt;</a>
+</div>
+
+<script>
+    window.onload = function () {
+        var container = document.getElementById('container');
+        var list = document.getElementById('list');
+        var buttons = document.getElementById('buttons').getElementsByTagName('span');
+        var prev = document.getElementById('prev');
+        var next = document.getElementById('next');
+        var index = 1;
+
+
+        function animate(offset) {
+            var newLeft = parseInt(list.style.left) + offset;
+            list.style.left = newLeft + 'px';
+            if (newLeft < -3000) {
+                list.style.left = -600 + 'px';
+            }
+            if (newLeft > -600) {
+                list.style.left = -3000 + 'px';
+            }
+        }
+
+        function showButton() {
+            for (var i = 0;i < buttons.length; i++) {
+                if (buttons[i].className == 'on') {
+                    buttons[i].className = '';
+                    break;
+                }
+            }
+            buttons[index-1].className = 'on';
+        }
+        prev.onclick = function () {
+            animate(600);
+            if(index == 1) {
+                index = 5;
+            } else {
+                index --;
+            }
+            showButton();
+        }
+        next.onclick = function () {
+            animate(-600);
+            if(index == 5) {
+                index = 1;
+            } else {
+                index ++;
+            }
+            showButton();
+        }
+        buttons[index].onclick = function () {
+            
+        }
+    }
+</script>
+</body>
+</html>
