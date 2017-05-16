@@ -35,19 +35,34 @@
         var prev = document.getElementById('prev');
         var next = document.getElementById('next');
         var index = 1;
+        var animated = false;
+        var timer;
 
-
+//动画函数
         function animate(offset) {
+            animated = true;
             var newLeft = parseInt(list.style.left) + offset;
-            list.style.left = newLeft + 'px';
-            if (newLeft < -3000) {
-                list.style.left = -600 + 'px';
+            var time = 300;
+            var interval = 10;
+            var speed = offset/(time/interval);
+            function go() {
+                if ((speed < 0 && parseInt(list.style.left) > newLeft) || (speed > 0 && parseInt(list.style.left) < newLeft)) {
+                    list.style.left = parseInt(list.style.left) + speed + 'px';
+                    setTimeout(go,interval);
+                } else {
+                    animated = false;
+                    list.style.left = newLeft + 'px';
+                    if (newLeft < -3000) {
+                        list.style.left = -600 + 'px';
+                    }
+                    if (newLeft > -600) {
+                        list.style.left = -3000 + 'px';
+                    }
+                }
             }
-            if (newLeft > -600) {
-                list.style.left = -3000 + 'px';
-            }
+            go();
         }
-
+//无限播放
         function showButton() {
             for (var i = 0;i < buttons.length; i++) {
                 if (buttons[i].className == 'on') {
@@ -58,7 +73,9 @@
             buttons[index-1].className = 'on';
         }
         prev.onclick = function () {
-            animate(600);
+            if (!animated) {
+                animate(600);
+            }
             if(index == 1) {
                 index = 5;
             } else {
@@ -67,7 +84,9 @@
             showButton();
         }
         next.onclick = function () {
-            animate(-600);
+            if (!animated) {
+                animate(-600);
+            }
             if(index == 5) {
                 index = 1;
             } else {
@@ -78,6 +97,31 @@
         buttons[index].onclick = function () {
             
         }
+//按钮切换
+        for (i = 0; i < buttons.length; i++) {
+            buttons[i].onclick = function () {
+                if (this.className == 'on') {
+                    return;
+                }
+                var myIndex = parseInt(this.getAttribute('index'));
+                var offset = -600*(myIndex - index);
+                animate(offset);
+                index = myIndex;
+                showButton();
+            }
+        }
+//自动播放
+        function play() {
+            timer = setInterval(function () {
+                next.onclick();
+            },3000)
+        }
+        function stop() {
+            clearInterval(timer);
+        }
+        container.onmouseover = stop;
+        container.onmouseout = play;
+        play();
     }
 </script>
 </body>
