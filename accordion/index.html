@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>手风琴效果</title>
+	<style type="text/css" media="screen">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		ul, li, a {
+			list-style: none;
+		}
+		body {
+			font-size: 12px;
+			font-family: "Microsoft Yahei";
+		}
+		.wraping {
+			width: 938px;
+			height: 128px;
+			border: 1px solid #ccc;
+			margin: 100px auto;
+		}
+		.wraping ul {
+			width: 1000px;
+			clear: both;
+		}
+		.wraping ul li {
+			width: 156px;
+			height: 128px;
+			float: left;
+			position: relative;
+		}		
+		.wraping ul li a {
+			position: relative;
+			width: 156px;
+			height: 128px;
+			display: block;
+			overflow: hidden;
+		}
+		.wraping ul li a img {
+			width: 117px;
+			height: 72px;
+			position: absolute;
+			bottom: 0px;
+			right: -13px;	
+		}
+		.wraping ul li .disc {
+           position: absolute;
+           left: 0px;
+           top: 0px;
+           width: 136px;
+           padding: 4px 10px;
+		}
+		.wraping ul li .disc h3 {
+           font-size: 14px;
+		}
+		.wraping ul li .disc p {
+			color:#868686;
+			font-size:12px;
+			overflow:hidden;
+			width:136px;
+			height:35px;
+			line-height:22px;
+			font-style:italic;
+		}
+		.wraping ul li .disc p strong {
+			font-size:22px;
+			font-style:Arial;
+			padding-right:2px;
+		}
+		.wraping ul li .disc p i {
+			font-size: 14px;
+		}
+		.wraping .line {
+			height:128px;
+			width:0;
+			font-size:0;
+			border-right:1px dashed #cacaca;
+			position:absolute;
+			right:0;
+			top:0px;
+		}
+		.wraping .mask {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 156px;
+			height: 128px;
+			background: #000;
+			opacity: 0;
+		}
+        .wraping:hover .mask {
+            opacity: 0.15;
+        }
+
+        /* 鼠标悬停，图片展开样式 */
+        .wraping ul * {
+        	transition: all linear .2s;
+        }
+		.wraping ul .big {
+			width: 314px;
+		}
+		.wraping ul .big a {
+			width: 314px;
+		}
+		.wraping ul .big a img {
+			position: absolute;
+			width: 195px;
+			height: 120px;
+			bottom: 0px;
+			right: 0px;
+		}
+		.wraping ul .big .disc {
+			width: 294px;
+			padding: 25px 10px;
+		}
+		.wraping ul .big .disc h3{
+			font-size: 18px;
+			margin-bottom: 15px;
+		}
+		.wraping ul .big .disc p {
+			font-size: 16px;
+			width: 166px;
+		}
+		.wraping ul .big .disc p strong {
+			font-size: 28px;
+		}
+		.wraping ul .big .disc p i {
+			font-size: 16px;
+		}
+        .wraping:hover .big .mask {
+        	opacity: 0;
+        }
+	</style>
+	<script src='js/jquery-1.9.1.js'></script>
+</head>
+<body>
+	<div class="wraping">
+		<ul>
+			<li>
+				<a href="#">
+					<img src="images/1.jpg" alt="">
+					<div class="disc">
+						<h3>聚美妆</h3>
+						<p>聚美装1/2周年庆</p>
+						<p><strong>1</strong><i>折起</i></p>
+					</div>
+				</a>
+				<div class="line"></div>
+				<div class="mask"></div>
+			</li>
+			<li class="big">
+				<a href="#">
+					<img src="images/2.jpg" alt="">
+					<div class="disc">
+						<h3>Baby购</h3>
+						<p>宝宝该换装了，新品抢购</p>
+						<p><strong>2.5</strong><i>折起</i></p>
+					</div>
+				</a>
+				<div class="line"></div>
+				<div class="mask"></div>
+			</li>
+			<li>
+				<a href="#">
+					<img src="images/3.jpg" alt="">
+					<div class="disc">
+						<h3>时装团</h3>
+						<p>时尚春装，清新小超搭配</p>
+						<p><strong>1</strong><i>折起</i></p>
+					</div>
+				</a>
+				<div class="line"></div>
+				<div class="mask"></div>
+			</li>
+			<li>	
+				<a href="#">
+					<img src="images/4.jpg" alt="">
+					<div class="disc">
+						<h3>TV购</h3>
+						<p>补血养颜，就这么简单</p>
+						<p><strong>2.6</strong><i>折起</i></p>
+					</div>
+				</a>
+				<div class="line"></div>
+				<div class="mask"></div>
+			</li>
+			<li>	
+				<a href="">
+					<img src="images/5.jpg" alt="">
+					<div class="disc">
+						<h3>聚新鲜</h3>
+						<p>最纯正的泰国香米</p>
+						<p><strong>5</strong><i>折起</i></p>
+					</div>
+				</a>
+				<div class="mask"></div>
+			</li>
+		</ul>
+	</div>
+
+	<script>
+		$(function() {
+			var list = $('.wraping li');
+			function mouseover(e) {
+				var target = $(e.target).parents('li');
+                list.removeClass('big');
+                target.addClass('big');
+			}
+		(function(){
+            var outer = $('.wraping');
+            outer.find('li').on('mouseover', mouseover);
+        })();
+		})
+	</script>
+</body>
+</html>
