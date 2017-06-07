@@ -1,0 +1,173 @@
+<style type="text/css" media="screen">
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	body {
+		font-size: 12px;
+		font-family: "Microsoft Yahei";
+	}
+	ul, li, a {
+       list-style: none;
+	}
+	#msg {
+       width: 550px;
+       border: 1px solid #eee;
+       margin: 100px auto;
+       overflow: hidden;
+	}
+	.top {
+		height: 40px;
+	}
+	.top a {
+		float: right;
+		display: block;
+		margin: 5px;
+		/* 必须设置宽度和高度，a标签中的图片才能显示 */
+		width: 16px;
+		height: 16px; 
+	}
+	.oncard {
+		background: url('images/btns.jpg')  no-repeat;
+		background-position: -21px -33px;
+    }
+    .recard {
+		background: url('images/btns.jpg')  no-repeat;
+		background-position: -37px -32px;
+	}
+	.onlist {
+		background: url('images/btns.jpg') no-repeat;
+		background-position: -21px 0px;
+	}
+	.relist {
+		background: url('images/btns.jpg') no-repeat;
+		background-position: -33px 0px;
+	}
+	.cont {
+		content: '';
+		clear: both;
+		overflow: hidden;
+	}
+	.cont li {
+		float: left;
+		width: 166px;
+		border: 1px solid #eee;
+		margin: 7px;
+	}
+	.cont li a {
+		width: 164px;
+		height: 164px;
+		display: block;
+		overflow: hidden;
+	}
+	.cont li .onsmall {
+		width: 50px;
+		height: 50px;
+		display: block;
+		float: left;
+		overflow: hidden;
+		margin:5px;
+	}
+
+	.cont li span {
+		display: block;
+		padding: 2px 0;	
+	}
+	.cont li p {
+		height: 30px;
+		font-size: 14px;
+		line-height: 30px;
+		color: #000;
+		text-align: center;
+		background: #ccc;
+	}
+</style>
+<body>
+	<div id="msg">
+		<div class="top">
+			<a href="#" id="list" class="relist"></a>
+			<a href="#" id="card" class="oncard"></a>
+		</div>
+		<ul class="cont">
+			<li>
+				<a href="#">
+					<img src="images/big.jpg" alt="">
+				</a>
+				<span>白阳</span>
+				<span>辽宁</span>
+				<span>21个共同好友</span>
+				<p>未分组好友</p>
+			</li>
+			<li>
+				<a href="#">
+					<img src="images/big.jpg" alt="">
+				</a>
+				<span>白阳</span>
+				<span>辽宁</span>
+				<span>21个共同好友</span>
+				<p>未分组好友</p>
+			</li>
+			<li>
+				<a href="#">
+					<img src="images/big.jpg" alt="">
+				</a>
+				<span>白阳</span>
+				<span>辽宁</span>
+				<span>21个共同好友</span>
+				<p>未分组好友</p>
+			</li>
+			<li>
+				<a href="#">
+					<img src="images/big.jpg" alt="">
+				</a>
+				<span>白阳</span>
+				<span>辽宁</span>
+				<span>21个共同好友</span>
+				<p>未分组好友</p>
+			</li>
+			<li>
+				<a href="#">
+					<img src="images/big.jpg" alt="">
+				</a>
+				<span>白阳</span>
+				<span>辽宁</span>
+				<span>21个共同好友</span>
+				<p>未分组好友</p>
+			</li>
+			<li>
+				<a href="#">
+					<img src="images/big.jpg" alt="">
+				</a>
+				<span>白阳</span>
+				<span>辽宁</span>
+				<span>21个共同好友</span>
+				<p>未分组好友</p>
+			</li>
+		</ul>
+	</div>
+
+	<script>
+		window.onload = function() {
+			var onCard = document.getElementById('card');
+			var onList = document.getElementById('list');
+			var imgLink = document.getElementsByTagName('img');
+			onCard.onclick = function() {
+                 this.className = 'oncard';
+                 onList.className = 'relist';
+                 for (var i = 0; i < imgLink.length; i++) {
+                 	imgLink[i].src = 'images/big.jpg';
+                 	imgLink[i].parentNode.className = '';
+                 }
+			}
+			onList.onclick = function() {
+                 this.className = 'onlist';
+                 onCard.className = 'recard';
+                 for (var i = 0; i < imgLink.length; i++) {
+                 	imgLink[i].src = 'images/small.jpg';
+                 	imgLink[i].parentNode.className = 'onsmall';
+                 }
+			}
+		}
+	</script>
+</body>
+</html>
