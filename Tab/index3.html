@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>滑动模式</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 12px;
+        }
+        
+        .tab {
+            width: 300px;
+            height: 98px;
+            margin: 100px auto;
+            border: 1px solid #eee;
+            overflow: hidden;
+        }
+        
+        .tit {
+            height: 27px;
+            position: relative;
+            background-color: #f7f7f7;
+            cursor: pointer;
+        }
+        
+        .tjt ul {
+            position: absolute;
+            width: 301px;
+            left: -1px;
+            top: 0;
+        }
+        
+        .tit li {
+            float: left;
+            width: 58px;
+            height: 26px;
+            padding: 0 1px;
+            line-height: 26px;
+            border-bottom: 1px solid #f7f7f7;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .tit li.select {
+            background-color: #fff;
+            border-left: 1px solid #eee;
+            border-right: 1px solid #eee;
+            font-weight: bolder;
+            padding: 0;
+        }
+        
+        .cont {
+            margin: 10px 6px;
+        }
+        
+        .cont .list ul li {
+            float: left;
+            width: 143px;
+            height: 25px;
+            overflow: hidden;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+</head>
+
+<body>
+    <div class="tab">
+        <div class="tit">
+            <ul>
+                <li class="select">公告</li>
+                <li>规则</li>
+                <li>论坛</li>
+                <li>安全</li>
+                <li>公益</li>
+            </ul>
+        </div>
+        <div class="cont">
+            <div class="list" style="display:block">
+                <ul>
+                    <li><a href="#">张勇：要玩快乐足球</a></li>
+                    <li><a href="#">阿里2000万驰援灾区！</a></li>
+                    <li><a href="#">旅游宝让你边玩边赚钱</a></li>
+                    <li><a href="#">多行跟进阿里信用贷款</a></li>
+                </ul>
+            </div>
+            <div class="list" style="display:none">
+                <ul>
+                    <li><span>[<a href="#">通知</a>]</span><a href="#">"滥发"即将换新</a></li>
+                    <li><span>[<a href="#">通知</a>]</span><a href="#">比特币严管啦！</a></li>
+                    <li><span>[<a href="#">通知</a>]</span><a href="#">禁发商品名录！</a></li>
+                    <li><span>[<a href="#">通知</a>]</span><a href="#">商品属性限制</a></li>
+                </ul>
+            </div>
+            <div class="list" style="display:none">
+                <ul>
+                    <li><span>[<a href="#">聚焦</a>]</span><a href="#"> 金牌卖家再启航</a></li>
+                    <li><span>[<a href="#">功能</a>]</span><a href="#">橱窗规则升级啦</a></li>
+                    <li><span>[<a href="#">话题</a>]</span><a href="#">又爱又恨优惠劵</a></li>
+                    <li><span>[<a href="#">工具</a>]</span><a href="#">购后送店铺红</a></li>
+                </ul>
+            </div>
+            <div class="list" style="display:none">
+                <ul>
+                    <li><a href="#">个人重要信息要记牢！</a></li>
+                    <li><a href="#">卖家防范红包欺诈提醒</a></li>
+                    <li><a href="#">更换收货地址的陷阱！</a></li>
+                    <li><a href="#">注意骗子的技术升级了！</a></li>
+                </ul>
+            </div>
+            <div class="list" style="display:none">
+                <ul>
+                    <li><a href="#">走进无声课堂</a></li>
+                    <li><a href="#">淘宝之行大众评审赢公益金</a></li>
+                    <li><a href="#">爱心品牌联合征集</a></li>
+                    <li><a href="#">名公益机构淘宝开店攻略</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(
+            function() {
+                var $titlist = $('.tit li');
+                var $contlist = $('.cont >.list');
+                var timer = null;
+                var index = 0;
+                //选项卡切换封装函数
+                function changeOption(curindex) {
+                    $titlist.eq(curindex).addClass('select').siblings().removeClass('select');
+                    $contlist.eq(curindex).css('display', 'block').siblings().css('display', 'none');
+                    index = curindex;
+                }
+                //自动切换函数
+                function autoPlay() {
+                    index++;
+                    if (index == $titlist.length) {
+                        index = 0;
+                    }
+                    changeOption(index);
+                }
+                //如果有等待定时器，先清除定时器
+                if (timer) {
+                    clearInterval(timer);
+                    timer = null;
+                }
+                //自动切换定时器
+                timer = setInterval(autoPlay, 2000);
+                $titlist.on('mouseover', function() {
+                    var that = $(this).index();
+                    if (timer) {
+                        clearInterval(timer);
+                        timer = null;
+                    }
+                    changeOption(that);
+                })
+                $titlist.on('mouseout', function() {
+                    timer = setInterval(autoPlay, 2000);
+                })
+            }
+        )
+    </script>
+</body>
+
+</html>
